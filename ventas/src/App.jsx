@@ -11,6 +11,10 @@ import {auth} from './firebase'
 import React from 'react';
 import RegistroVentas from './Components/RegistroVentas';
 import MaestroProductos from './Components/MaestroProductos';
+// import MaestroVentas from './Components/MaestroVentas';
+
+
+
 
 function App() {
 
@@ -41,7 +45,7 @@ function App() {
         <RegistroVentas />
         </Route>
         <Route path="/MaestroVentas">
-          
+  
         </Route>
         <Route path="/MaestroProductos">
           <MaestroProductos />
