@@ -118,7 +118,7 @@ const Login = (props) => {
                             onChange={(e)=>setPass(e.target.value)}
                         />
                         <div className="d-grid gap-2">
-                        <button className="btn btn-dark btn-lg" 
+                        <button className="btn btn-dark btn-lg btn-block" 
                         type="submit"
                         >
                             {esRegistro ? 'Registrar' : 'Acceder'}  

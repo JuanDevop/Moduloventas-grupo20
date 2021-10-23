@@ -1,25 +1,61 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Navbar from './Components/Navbar';
+import Login from './Components/Login';
+import Admin from './Components/Admin';
+import {auth} from './firebase'
+import React from 'react';
+import RegistroVentas from './Components/RegistroVentas';
+import MaestroProductos from './Components/MaestroProductos';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  const [firebaseUser, setFirebaseUser] = React.useState(false)
+
+  React.useEffect(()=>{
+    auth.onAuthStateChanged(user => {
+      if(user){
+        setFirebaseUser(user)
+      }else{
+        setFirebaseUser(null)
+      }
+    })
+  },[])
+
+  return firebaseUser !== false ? (
+  <Router>
+    <Navbar firebaseUser={firebaseUser} />
+    <div className="container mt-3">
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/admin">
+          <Admin />
+        </Route>
+        <Route path="/RegistroVentas">
+        <RegistroVentas />
+        </Route>
+        <Route path="/MaestroVentas">
+          
+        </Route>
+        <Route path="/MaestroProductos">
+          <MaestroProductos />
+        </Route>
+        <Route path="/" exact>
+          
+        </Route>
+      </Switch>
     </div>
-  );
+  </Router>
+  ) : (
+    <p>Cargando ...</p>
+  )
 }
 
 export default App;
+
